@@ -24,6 +24,7 @@
 #include <stdio.h>
 #include "ILI9341_STM32_Driver.h"
 #include "ILI9341_GFX.h"
+#include "snow_tiger.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -99,6 +100,7 @@ int main(void)
   /* USER CODE BEGIN 2 */
   ILI9341_Init();
 
+#if 0
   // Simple Text writing (Text, Font, X, Y, Color, BackColor)
   // Available Fonts are FONT1, FONT2, FONT3 and FONT4
   ILI9341_FillScreen(WHITE);
@@ -158,6 +160,7 @@ int main(void)
   ILI9341_FillScreen(WHITE);
   ILI9341_DrawPixel(100, 100, BLACK);
   HAL_Delay(1000);
+#endif
 
   /* USER CODE END 2 */
 
@@ -165,9 +168,73 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
+		static uint16_t x = 0;
+		static uint16_t y = 0;
+		static char BufferText[40];
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
+
+		/* COUNTING MULTIPLE SEGMENTS */
+		ILI9341_FillScreen(WHITE);
+		ILI9341_SetRotation(SCREEN_HORIZONTAL_2);
+		ILI9341_DrawText("Counting multiple segments at once", FONT2, 10, 10, BLACK, WHITE);
+		HAL_Delay(2000);
+		ILI9341_FillScreen(WHITE);
+
+		for(uint16_t i = 0; i <= 10; i++)
+		{
+			sprintf(BufferText, "Counting: %d", i);
+			ILI9341_DrawText(BufferText, FONT3, 10, 10, BLACK, WHITE);
+			ILI9341_DrawText(BufferText, FONT3, 10, 30, BLUE, WHITE);
+			ILI9341_DrawText(BufferText, FONT3, 10, 50, RED, WHITE);
+			ILI9341_DrawText(BufferText, FONT3, 10, 70, GREEN, WHITE);
+			ILI9341_DrawText(BufferText, FONT3, 10, 90, BLACK, WHITE);
+			ILI9341_DrawText(BufferText, FONT3, 10, 110, BLUE, WHITE);
+			ILI9341_DrawText(BufferText, FONT3, 10, 130, RED, WHITE);
+			ILI9341_DrawText(BufferText, FONT3, 10, 150, GREEN, WHITE);
+			ILI9341_DrawText(BufferText, FONT3, 10, 170, WHITE, BLACK);
+			ILI9341_DrawText(BufferText, FONT3, 10, 190, BLUE, BLACK);
+			ILI9341_DrawText(BufferText, FONT3, 10, 210, RED, BLACK);
+		}
+		HAL_Delay(1000);
+
+		/* COUNTING MULTIPLE SEGMENTS */
+		ILI9341_FillScreen(WHITE);
+		ILI9341_SetRotation(SCREEN_VERTICAL_1);
+		ILI9341_DrawText("Counting multiple segments at once", FONT2, 10, 10, BLACK, WHITE);
+		HAL_Delay(2000);
+		ILI9341_FillScreen(WHITE);
+
+		for(uint16_t i = 0; i <= 10; i++)
+		{
+			sprintf(BufferText, "Counting: %d", i);
+			ILI9341_DrawText(BufferText, FONT3, 10, 10, BLACK, WHITE);
+			ILI9341_DrawText(BufferText, FONT3, 10, 30, BLUE, WHITE);
+			ILI9341_DrawText(BufferText, FONT3, 10, 50, RED, WHITE);
+			ILI9341_DrawText(BufferText, FONT3, 10, 70, GREEN, WHITE);
+			ILI9341_DrawText(BufferText, FONT3, 10, 90, BLACK, WHITE);
+			ILI9341_DrawText(BufferText, FONT3, 10, 110, BLUE, WHITE);
+			ILI9341_DrawText(BufferText, FONT3, 10, 130, RED, WHITE);
+			ILI9341_DrawText(BufferText, FONT3, 10, 150, GREEN, WHITE);
+			ILI9341_DrawText(BufferText, FONT3, 10, 170, WHITE, BLACK);
+			ILI9341_DrawText(BufferText, FONT3, 10, 190, BLUE, BLACK);
+			ILI9341_DrawText(BufferText, FONT3, 10, 210, RED, BLACK);
+		}
+		HAL_Delay(1000);
+
+		/* IMAGE EXAMPLE */
+		ILI9341_FillScreen(WHITE);
+		ILI9341_SetRotation(SCREEN_HORIZONTAL_2);
+		ILI9341_DrawText("RGB Picture", FONT3, 10, 10, RED, YELLOW);
+		ILI9341_DrawText("TIGER", FONT3, 10, 30, BLACK, WHITE);
+		HAL_Delay(2000);
+		ILI9341_FillScreen(WHITE);
+		ILI9341_DrawImage(snow_tiger, SCREEN_HORIZONTAL_2);
+		ILI9341_SetRotation(SCREEN_HORIZONTAL_2);
+		//ILI9341_DrawImage(snow_tiger, SCREEN_VERTICAL_2);
+		//ILI9341_SetRotation(SCREEN_VERTICAL_1);
+		HAL_Delay(5000);
   }
   /* USER CODE END 3 */
 }
